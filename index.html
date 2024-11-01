@@ -1,45 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Vocab</title>
+    <title>Master Vocab</title>
     <style>
-        /* Basic reset */
+        /* General Styling */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        body {
             font-family: Arial, sans-serif;
-            height: 100vh;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #f0e130;
-            /* Gold text color */
         }
-
+        
+        body {
+            background-color: #000;
+            color: #FFD700;
+        }
+        
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
             text-align: center;
         }
 
-        h1 {
-            font-size: 4em;
-            font-weight: bold;
-            color: #f0e130;
+        /* Header Styling */
+        header {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #FFD700;
+        }
+
+        /* Button Styling */
+        .button {
+            background-color: #FFD700;
+            color: #000;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #FFC300;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 60px 20px;
+            text-align: left;
+            margin-top: 40px;
+            background-color: #111;
+            border-radius: 10px;
+        }
+
+        .section h2 {
+            color: #FFD700;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            font-size: 1.1em;
+            color: #eee;
+            line-height: 1.6;
+        }
+
+        /* Footer Styling */
+        footer {
+            padding: 20px;
+            color: #333;
+            background-color: #FFD700;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        footer p {
+            color: #000;
+            font-size: 0.9em;
         }
     </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>Love Vocab</h1>
-    </div>
-</body>
+    <header>
+        <h1>Master Vocab</h1>
+        <p>Your journey to mastering vocabulary begins here.</p>
+        <button class="button">Get Started</button>
+    </header>
 
+    <div class="container">
+        <section class="section">
+            <h2>Spaced Repetition</h2>
+            <p>Master Vocab uses the powerful Leitner Algorithm to help you retain vocabulary in the long term. Our spaced repetition system ensures you review words at the optimal time for memory.</p>
+        </section>
+
+        <section class="section">
+            <h2>Personalized Learning</h2>
+            <p>Receive customized word lists based on your level and interests, helping you build vocabulary that’s relevant to you.</p>
+        </section>
+
+        <section class="section">
+            <h2>Track Your Progress</h2>
+            <p>Monitor your journey with progress tracking, achievements, and daily goals. Stay motivated as you see your vocabulary grow over time!</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Master Vocab. All rights reserved.</p>
+    </footer>
+</body>
 </html>
