@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1200px; height: 630px;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #ddfaee 0%, #e2f1ff 55%, #d9ecff 100%);
+    overflow: hidden;
+    position: relative;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    opacity: 0.5;
+  }
+  .blob.a { width: 380px; height: 380px; background: radial-gradient(circle, #bdf5db, transparent 70%); top: -120px; left: -100px; }
+  .blob.b { width: 420px; height: 420px; background: radial-gradient(circle, #c6e3ff, transparent 70%); bottom: -160px; right: -100px; }
+  .wrap {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 80px;
+    gap: 56px;
+  }
+  .left { flex: 1.1; }
+  .mark {
+    width: 76px; height: 76px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #3ee08f, #3b8bf5);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 28px;
+    box-shadow: 0 10px 30px rgba(59,139,245,0.28);
+  }
+  .mark svg { width: 40px; height: 40px; }
+  .wordmark {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 700;
+    font-size: 56px;
+    color: #112233;
+    letter-spacing: -0.5px;
+    margin-bottom: 18px;
+  }
+  .wordmark span { color: #2f9e64; }
+  .tagline {
+    font-size: 26px;
+    color: #3a4a55;
+    font-weight: 500;
+    line-height: 1.4;
+    max-width: 480px;
+  }
+  .pills { display: flex; gap: 10px; margin-top: 28px; }
+  .pill {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.75);
+    border: 1px solid rgba(20,40,50,0.08);
+    color: #225b8c;
+  }
+  .right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 420px;
+  }
+  .card {
+    position: absolute;
+    width: 300px;
+    height: 380px;
+    border-radius: 28px;
+    background: rgba(255,255,255,0.82);
+    border: 1px solid rgba(20,40,50,0.08);
+    box-shadow: 0 30px 60px rgba(30,60,90,0.18);
+    padding: 30px;
+  }
+  .card.back {
+    transform: rotate(7deg) translate(34px, 18px);
+    opacity: 0.55;
+  }
+  .card.front {
+    transform: rotate(-4deg);
+  }
+  .tag {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+  .tag.blue { background: rgba(59,130,246,0.14); color: #2563eb; }
+  .word { font-family: 'Fredoka', sans-serif; font-size: 34px; font-weight: 600; color: #16222c; margin-bottom: 10px; }
+  .phonetic { font-size: 16px; color: #7c8a93; margin-bottom: 22px; }
+  .bar { height: 11px; border-radius: 6px; margin-bottom: 10px; }
+  .bar.green { width: 80%; background: rgba(34,197,94,0.28); }
+  .bar.purple { width: 92%; background: rgba(168,85,247,0.24); }
+  .bar.purple2 { width: 60%; background: rgba(168,85,247,0.24); }
+  .bar.orange { width: 70%; background: rgba(245,158,11,0.26); }
+</style>
+</head>
+<body>
+  <div class="blob a"></div>
+  <div class="blob b"></div>
+  <div class="wrap">
+    <div class="left">
+      <div class="mark">
+        <svg viewBox="0 0 64 64"><rect x="10" y="20" width="34" height="24" rx="5" fill="#ffffff" opacity="0.4" transform="rotate(-9 27 32)"/><rect x="12" y="17" width="34" height="24" rx="5" fill="#ffffff" opacity="0.7" transform="rotate(5 29 29)"/><rect x="14" y="14" width="34" height="24" rx="5" fill="#ffffff"/></svg>
+      </div>
+      <div class="wordmark">Love<span>Vocab</span></div>
+      <div class="tagline">Learn anything. Remember it forever. AI builds the flashcard — the Leitner system makes sure it sticks.</div>
+      <div class="pills">
+        <div class="pill">AI-generated cards</div>
+        <div class="pill">Spaced repetition</div>
+        <div class="pill">100% private</div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="card back"></div>
+      <div class="card front">
+        <span class="tag blue">Word</span>
+        <div class="word">Ephemeral</div>
+        <div class="phonetic">/əˈfem.ər.əl/</div>
+        <div class="bar green"></div>
+        <div class="bar purple"></div>
+        <div class="bar purple2"></div>
+        <div class="bar orange"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

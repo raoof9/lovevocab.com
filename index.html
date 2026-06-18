@@ -1,125 +1,383 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master Vocab</title>
-    <style>
-        /* General Styling */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        
-        body {
-            background-color: #000;
-            color: #FFD700;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            text-align: center;
-        }
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('lv-theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LoveVocab — Learn Anything. Remember It Forever.</title>
+<meta name="description" content="LoveVocab turns any word or topic into a complete flashcard with AI, then uses the Leitner spaced-repetition system to schedule your reviews so you only study what you're about to forget. Coming soon to iOS.">
+<meta name="theme-color" content="#9fe7c8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b1119" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://lovevocab.com/">
 
-        /* Header Styling */
-        header {
-            padding: 40px 20px;
-            text-align: center;
-        }
+<link rel="icon" type="image/svg+xml" href="/assets/img/app-icon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
 
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lovevocab.com/">
+<meta property="og:title" content="LoveVocab — Learn Anything. Remember It Forever.">
+<meta property="og:description" content="AI builds the flashcard. The Leitner spaced-repetition system makes sure it sticks. For vocabulary, programming, or anything else worth remembering.">
+<meta property="og:image" content="https://lovevocab.com/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LoveVocab — Learn Anything. Remember It Forever.">
+<meta name="twitter:description" content="AI builds the flashcard. The Leitner spaced-repetition system makes sure it sticks.">
+<meta name="twitter:image" content="https://lovevocab.com/assets/img/og-image.png">
 
-        header p {
-            font-size: 1.2em;
-            color: #FFD700;
-        }
-
-        /* Button Styling */
-        .button {
-            background-color: #FFD700;
-            color: #000;
-            padding: 15px 30px;
-            font-size: 1.1em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 20px;
-        }
-
-        .button:hover {
-            background-color: #FFC300;
-        }
-
-        /* Section Styling */
-        .section {
-            padding: 60px 20px;
-            text-align: left;
-            margin-top: 40px;
-            background-color: #111;
-            border-radius: 10px;
-        }
-
-        .section h2 {
-            color: #FFD700;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .section p {
-            font-size: 1.1em;
-            color: #eee;
-            line-height: 1.6;
-        }
-
-        /* Footer Styling */
-        footer {
-            padding: 20px;
-            color: #333;
-            background-color: #FFD700;
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        footer p {
-            color: #000;
-            font-size: 0.9em;
-        }
-    </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Master Vocab</h1>
-        <p>Your journey to mastering vocabulary begins here.</p>
-        <button class="button">Get Started</button>
-    </header>
 
-    <div class="container">
-        <section class="section">
-            <h2>Spaced Repetition</h2>
-            <p>Master Vocab uses the powerful Leitner Algorithm to help you retain vocabulary in the long term. Our spaced repetition system ensures you review words at the optimal time for memory.</p>
-        </section>
+<a class="skip-link" href="#main">Skip to content</a>
 
-        <section class="section">
-            <h2>Personalized Learning</h2>
-            <p>Receive customized word lists based on your level and interests, helping you build vocabulary that’s relevant to you.</p>
-        </section>
+<header class="nav-wrap">
+  <nav class="nav container">
+    <a class="brand" href="#top">
+      <img src="/assets/img/icon-mark.svg" alt="" class="brand-mark" width="32" height="32">
+      <span class="brand-name">Love<strong>Vocab</strong></span>
+    </a>
 
-        <section class="section">
-            <h2>Track Your Progress</h2>
-            <p>Monitor your journey with progress tracking, achievements, and daily goals. Stay motivated as you see your vocabulary grow over time!</p>
-        </section>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+      <a href="#how-it-works">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#showcase">Inside the app</a>
+      <a href="#faq">FAQ</a>
+      <a href="/privacy.html">Privacy</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" type="button">
+        <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g stroke-linecap="round"><path d="M12 2.5v3"/><path d="M12 18.5v3"/><path d="M2.5 12h3"/><path d="M18.5 12h3"/><path d="M4.9 4.9l2.1 2.1"/><path d="M17 17l2.1 2.1"/><path d="M19.1 4.9 17 7"/><path d="M7 17l-2.1 2.1"/></g></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg>
+      </button>
     </div>
+  </nav>
+</header>
 
-    <footer>
-        <p>&copy; 2024 Master Vocab. All rights reserved.</p>
-    </footer>
+<main id="main">
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="ambient-bg" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div class="hero-copy reveal">
+        <span class="pill pill-soft">Coming soon · iOS</span>
+        <h1 class="hero-title">Learn anything.<br>Remember it <em>forever</em>.</h1>
+        <p class="hero-sub">Paste a word, a phrase, or a topic. AI builds a complete flashcard for you — and the Leitner spaced-repetition system makes sure it actually sticks.</p>
+        <div class="hero-actions">
+          <span class="btn btn-primary btn-disabled" role="img" aria-label="Coming soon to the App Store">
+            <svg viewBox="0 0 384 512" width="18" height="18" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.2-52.5.8-108.4 41.6-108.4 124.5 0 25.4 4.6 51.6 13.9 78.5 12.4 35.7 57.2 123.2 103.9 121.7 24.6-.6 42-17.5 74.1-17.5 31.1 0 47.1 17.5 74.4 17.5 47.1-.7 87.8-80.4 99.6-116.2-63.5-29.9-58-87.8-57.9-80.6zM254.8 51.4c25.3-30.1 23-57.5 22.2-67.4-21.8 1.3-47.1 15-61.6 32.2-15.9 18.5-25.2 41.4-23.2 66.9 23.3-1.8 45.4-13.7 62.6-31.7z"/></svg>
+            Coming soon to the App Store
+          </span>
+          <a class="btn btn-ghost" href="#how-it-works">See how it works ↓</a>
+        </div>
+        <p class="hero-microcopy">No account. No ads. No data leaving your phone.</p>
+      </div>
+
+      <div class="hero-visual reveal" aria-hidden="true">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front glass-card">
+              <span class="tag tag-blue">Word</span>
+              <div class="demo-word">Ephemeral</div>
+              <div class="demo-phonetic">/əˈfem.ər.əl/</div>
+              <div class="demo-row"><span class="dot dot-blue"></span> Tap to reveal</div>
+            </div>
+            <div class="flip-face flip-back glass-card">
+              <span class="tag tag-green">Translation</span>
+              <div class="demo-line demo-line-green">efímero</div>
+              <span class="tag tag-purple">Example</span>
+              <div class="demo-line">“The blossoms are ephemeral, lasting just a week.”</div>
+              <span class="tag tag-pink">Synonyms</span>
+              <div class="demo-line">fleeting · transient</div>
+              <span class="tag tag-orange">Note</span>
+              <div class="demo-line">Used for beauty that fades fast.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS / SCIENCE -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">The technique</span>
+        <h2>This isn't just another flashcard app</h2>
+        <p class="section-sub">It's built on two ideas learning science keeps proving work: <strong>active recall</strong> and <strong>spaced repetition</strong>. LoveVocab automates both, so all you do is answer honestly.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="glass-card step-card reveal" style="--stagger:0">
+          <div class="step-num">1</div>
+          <h3>AI does the hard part</h3>
+          <p>Paste a word, a phrase, or a topic. AI instantly structures a full flashcard — definition, examples, translation, common mistakes, whatever fits the subject. No manual data entry, ever.</p>
+        </div>
+        <div class="glass-card step-card reveal" style="--stagger:1">
+          <div class="step-num">2</div>
+          <h3>The Leitner system schedules your memory</h3>
+          <p>Every card lives in one of 5 boxes with increasing review gaps — 1, 2, 4, 8, 16 days. Answer right, it moves up a box. Answer wrong, it drops back to box 1.</p>
+        </div>
+        <div class="glass-card step-card reveal" style="--stagger:2">
+          <div class="step-num">3</div>
+          <h3>You only review what's due</h3>
+          <p>No overwhelming decks, no busywork. Open the app and you'll see exactly the cards your brain is about to forget — nothing more.</p>
+        </div>
+      </div>
+
+      <div class="glass-card journey-panel reveal">
+        <div class="journey-head">
+          <h3>Watch a card move through the boxes</h3>
+          <p>Every correct answer pushes it further out. One miss sends it back to day one.</p>
+        </div>
+        <div class="journey" role="img" aria-label="Animated diagram showing a flashcard advancing from box 1 to box 5 as it is answered correctly, then resetting to box 1 after a missed answer.">
+          <div class="journey-track">
+            <div class="journey-line"></div>
+            <div class="journey-token">
+              <svg viewBox="0 0 40 28" width="34" height="24"><rect x="1" y="1" width="38" height="26" rx="6" fill="currentColor"/></svg>
+            </div>
+            <div class="journey-box" style="--i:0">
+              <div class="journey-node">1</div>
+              <span class="journey-label">Day 1</span>
+            </div>
+            <div class="journey-box" style="--i:1">
+              <div class="journey-node">2</div>
+              <span class="journey-label">Day 2</span>
+            </div>
+            <div class="journey-box" style="--i:2">
+              <div class="journey-node">3</div>
+              <span class="journey-label">Day 4</span>
+            </div>
+            <div class="journey-box" style="--i:3">
+              <div class="journey-node">4</div>
+              <span class="journey-label">Day 8</span>
+            </div>
+            <div class="journey-box" style="--i:4">
+              <div class="journey-node">5</div>
+              <span class="journey-label">Day 16+</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Why people stick with it</span>
+        <h2>Everything built around remembering, nothing else</h2>
+      </div>
+
+      <div class="features-grid">
+        <div class="glass-card feature-card reveal" style="--stagger:0">
+          <div class="feature-icon icon-blue">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2l1.6 4.8L18 8l-4.4 1.6L12 14l-1.6-4.4L6 8l4.4-1.2z" fill="currentColor"/><circle cx="19" cy="17" r="2.2" fill="currentColor"/><circle cx="5" cy="18" r="1.6" fill="currentColor"/></svg>
+          </div>
+          <h3>AI card creation</h3>
+          <p>Type a word or topic and get a structured, ready-to-study card in seconds — no templates to fill in.</p>
+        </div>
+        <div class="glass-card feature-card reveal" style="--stagger:1">
+          <div class="feature-icon icon-indigo">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 5h16M4 12h16M4 19h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Built for any subject</h3>
+          <p>Language vocabulary with pronunciation and translation, or programming concepts, system design, notes — anything worth remembering.</p>
+        </div>
+        <div class="glass-card feature-card reveal" style="--stagger:2">
+          <div class="feature-icon icon-green">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M3 12a9 9 0 1 0 3-6.7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M3 4v5h5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3>Leitner spaced repetition</h3>
+          <p>A proven scheduling algorithm decides what to show you today — so review time stays short and effective.</p>
+        </div>
+        <div class="glass-card feature-card reveal" style="--stagger:3">
+          <div class="feature-icon icon-purple">
+            <svg viewBox="0 0 24 24" width="22" height="22"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M8 9h8M8 13h8M8 17h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h3>Rich detail views</h3>
+          <p>Examples, translations, synonyms and notes, each clearly organized by color so you scan, not search.</p>
+        </div>
+        <div class="glass-card feature-card reveal" style="--stagger:4">
+          <div class="feature-icon icon-yellow">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.7l-5.2 2.9 1-5.8-4.3-4.1 5.9-.9z" fill="currentColor"/></svg>
+          </div>
+          <h3>Favorites</h3>
+          <p>Pin the cards that matter most so they're always one tap away, regardless of what's due.</p>
+        </div>
+        <div class="glass-card feature-card reveal" style="--stagger:5">
+          <div class="feature-icon icon-pink">
+            <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 21s-7-4.5-7-10.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 7 3.5C19 16.5 12 21 12 21z" fill="currentColor"/></svg>
+          </div>
+          <h3>Privacy-first</h3>
+          <p>Everything lives on your device. No account, no backend, no analytics — your study data is yours alone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHOWCASE -->
+  <section class="section" id="showcase">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">A closer look</span>
+        <h2>Calm, focused, easy on the eyes</h2>
+        <p class="section-sub">Frosted glass cards, soft color-coding, and nothing competing for your attention.</p>
+      </div>
+
+      <div class="phones-row">
+        <div class="phone reveal" style="--stagger:0">
+          <div class="phone-screen">
+            <div class="phone-statusbar"></div>
+            <div class="mock-card-list">
+              <div class="mock-list-item">
+                <span class="dot dot-blue"></span>
+                <div>
+                  <div class="mock-list-title">Resilient</div>
+                  <div class="mock-list-sub">Box 3 · due today</div>
+                </div>
+              </div>
+              <div class="mock-list-item">
+                <span class="dot dot-indigo"></span>
+                <div>
+                  <div class="mock-list-title">Idempotent</div>
+                  <div class="mock-list-sub">Box 1 · due today</div>
+                </div>
+              </div>
+              <div class="mock-list-item">
+                <span class="dot dot-yellow"></span>
+                <div>
+                  <div class="mock-list-title">Serendipity</div>
+                  <div class="mock-list-sub">Box 5 · favorited</div>
+                </div>
+              </div>
+              <div class="mock-list-item">
+                <span class="dot dot-blue"></span>
+                <div>
+                  <div class="mock-list-title">Ubiquitous</div>
+                  <div class="mock-list-sub">Box 2 · due today</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone reveal" style="--stagger:1">
+          <div class="phone-screen">
+            <div class="phone-statusbar"></div>
+            <div class="mock-detail">
+              <span class="tag tag-indigo">Programming</span>
+              <div class="mock-detail-title">Idempotent</div>
+              <div class="mock-detail-row mock-row-green">An operation that produces the same result no matter how many times it's applied.</div>
+              <div class="mock-detail-row mock-row-purple">PUT /users/5 is idempotent — calling it twice has the same effect as once.</div>
+              <div class="mock-detail-row mock-row-orange">Often confused with "safe" — idempotent operations can still change state.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phone reveal" style="--stagger:2">
+          <div class="phone-screen">
+            <div class="phone-statusbar"></div>
+            <div class="mock-review">
+              <div class="mock-review-label">Box 2 · due today</div>
+              <div class="mock-review-word">Ubiquitous</div>
+              <div class="mock-review-actions">
+                <div class="mock-btn mock-btn-no">Got it wrong</div>
+                <div class="mock-btn mock-btn-yes">Got it right</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="container container-narrow">
+      <div class="section-head reveal">
+        <span class="eyebrow">Questions</span>
+        <h2>Frequently asked</h2>
+      </div>
+
+      <div class="faq-list reveal">
+        <details class="faq-item">
+          <summary>Is this just another flashcard app?</summary>
+          <p>No. Most flashcard apps still make you write every card by hand and decide for yourself what to study. LoveVocab uses AI to build the card and the Leitner system to decide exactly what's due — you just answer.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does it only work for language learning?</summary>
+          <p>Not at all. Vocabulary and phrases are one use case, but the same engine works for programming concepts, system design notes, definitions for an exam — anything you'd otherwise put on a flashcard.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What exactly is the Leitner system?</summary>
+          <p>A spaced-repetition method using 5 boxes with increasing review intervals — 1, 2, 4, 8 and 16 days. A correct answer moves a card to the next box, so you see it less often. A wrong answer sends it back to box 1, so it comes back sooner. Over time you stop wasting time on what you already know.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is my data private?</summary>
+          <p>Yes — completely. LoveVocab has no account system, no backend server, and no analytics. Every card and every review lives only on your device. See the <a href="/privacy.html">Privacy Policy</a> for details.</p>
+        </details>
+        <details class="faq-item">
+          <summary>When is it launching?</summary>
+          <p>LoveVocab is in development for iOS and coming to the App Store soon. There's no email list or signup — just check back here.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need to create an account?</summary>
+          <p>No. There's nothing to sign up for. Open the app and start adding cards.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="section cta-section">
+    <div class="container">
+      <div class="glass-card cta-card reveal">
+        <h2>Stop forgetting what you just learned.</h2>
+        <p>LoveVocab is coming soon to iOS.</p>
+        <span class="btn btn-primary btn-disabled" role="img" aria-label="Coming soon to the App Store">
+          <svg viewBox="0 0 384 512" width="18" height="18" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.2-52.5.8-108.4 41.6-108.4 124.5 0 25.4 4.6 51.6 13.9 78.5 12.4 35.7 57.2 123.2 103.9 121.7 24.6-.6 42-17.5 74.1-17.5 31.1 0 47.1 17.5 74.4 17.5 47.1-.7 87.8-80.4 99.6-116.2-63.5-29.9-58-87.8-57.9-80.6zM254.8 51.4c25.3-30.1 23-57.5 22.2-67.4-21.8 1.3-47.1 15-61.6 32.2-15.9 18.5-25.2 41.4-23.2 66.9 23.3-1.8 45.4-13.7 62.6-31.7z"/></svg>
+          Coming soon to the App Store
+        </span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <a class="brand" href="#top">
+      <img src="/assets/img/icon-mark.svg" alt="" class="brand-mark" width="28" height="28">
+      <span class="brand-name">Love<strong>Vocab</strong></span>
+    </a>
+    <nav class="footer-links">
+      <a href="#how-it-works">How it works</a>
+      <a href="#features">Features</a>
+      <a href="#faq">FAQ</a>
+      <a href="/privacy.html">Privacy Policy</a>
+    </nav>
+    <p class="footer-copy">© 2026 LoveVocab. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="/assets/js/main.js"></script>
 </body>
 </html>
